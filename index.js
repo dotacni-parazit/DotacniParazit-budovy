@@ -4,10 +4,10 @@ var axios = require("axios");
 
 var connection = mysql.createConnection({
   host: 'localhost',
-  port: '3307',
-  user: 'user',
-  password: 'password',
-  database: 'database',
+  port: '3306',
+  user: '',
+  password: '',
+  database: 'cedr',
 });
 
 connection.connect();
@@ -20,15 +20,7 @@ connection.query(
     console.log('Results in hackujstat.budovaAdresa were deleted.')
   }
   connection.query(
-    `
-      SELECT 
-      GROUP_CONCAT(DISTINCT(idAdresa))
-      FROM cedr.AdresaSidlo adrs
-        JOIN cedr.Dotace as dot on dot.idPrijemce = adrs.idPrijemce
-          JOIN Rozhodnuti as roz on roz.idDotace = dot.idDotace
-
-      WHERE adrs.cisloDomovni != 0
-      GROUP BY adrs.ulice, adrs.cisloDomovni, substr(adrs.psc, 1, 2)
+    `SELECT GROUP_CONCAT(DISTINCT(idAdresa)) FROM cedr.AdresaSidlo adrs JOIN cedr.Dotace as dot on dot.idPrijemce = adrs.idPrijemce JOIN cedr.Rozhodnuti as roz on roz.idDotace = dot.idDotace WHERE adrs.cisloDomovni != 0 GROUP BY adrs.ulice, adrs.cisloDomovni, substr(adrs.psc, 1, 2)
     `, (selError, results, fields) => {
       if (selError) {
         console.log("Error while performing SELECT Query.", selError);

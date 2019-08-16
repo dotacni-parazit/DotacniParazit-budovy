@@ -11,6 +11,13 @@ Install these tools:
 - Node.JS 8.x.x - 10.x.x
 - Yarn
 
+Setup environment:
+- wget -c "https://nodejs.org/dist/v10.16.2/node-v10.16.2-linux-x64.tar.xz"
+- tar xvf node-v10.16.2-linux-x64.tar.xz
+- mv node-v10.16.2-linux-x64 node
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH=/path/to/node/folder:/home/.yarn/bin/:$PATH
+
 Go to the directory
 - install dependencies `yarn install`
 - run the script `yarn start`
